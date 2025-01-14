@@ -1,0 +1,31 @@
+###
+@baseUrl = http://localhost:3000
+###
+
+
+### criar um estado
+
+POST {{baseUrl}}/estado/
+Content-Type: application/json
+
+{
+    "nome": "Santa Catarina",
+    "sigla": "SC"
+}
+
+### atualizar um estado
+
+PUT {{baseUrl}}/estado/
+Content-Type: application/json
+
+{
+    "id": 2,
+    "nome": "Paraná",
+    "sigla": "PR"
+}
+
+### pegar um estado
+GET {{baseUrl}}/estado/3
+
+### pegar todos os estados
+GET {{baseUrl}}/estado/

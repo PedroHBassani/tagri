@@ -1,0 +1,31 @@
+### 
+@baseUrl = http://localhost:3000
+###
+
+### criar um municipio
+
+POST {{baseUrl}}/municipio
+Content-Type: application/json
+{
+    "nome": "Nome do Municipio",
+    "estado_id": 1
+}
+
+### pegar um municipio
+GET {{baseUrl}}/municipio/3
+
+### listar municipios
+GET {{baseUrl}}/municipio/paginate?page=0&per_page=10&filtro_estado_nome=Parana&filtro_nome=Curitiba
+###
+GET {{baseUrl}}/municipio/paginate?page=0&per_page=10
+
+### atualizar um municipio
+PUT {{baseUrl}}/municipio
+Content-Type: application/json
+
+{
+    "id": 3,
+    "nome": "Nome do Municipio",
+    "estado_id": 1
+}
+

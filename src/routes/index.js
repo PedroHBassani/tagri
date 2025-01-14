@@ -5,9 +5,9 @@ const routes = (app) => {
     return success(res, "Agro finance API");
   });
 
-  app.get("/users", (req, res) => {
-    return error(res, "Rota de teste de users", 404);
-  });
+  app.use("/estado", require("./estadoRouter.js"));
+  app.use("/fazenda", require("./fazendaRouter.js"));
+  app.use("/municipio", require("./municipioRouter.js"));
 
   app.use((req, res) => {
     return error(res, "Rota não encontrada", 404);

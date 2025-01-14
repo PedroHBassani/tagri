@@ -1,35 +1,35 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
 
-const Fazenda = sequelize.define(
-  "Fazenda",
+const Estado = sequelize.define(
+  "Estado",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    responsavel_id: {
-      type: DataTypes.INTEGER,
+    nome: {
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
-    nome: {
-      type: DataTypes.STRING,
+    sigla: {
+      type: DataTypes.STRING(2),
       allowNull: false,
     },
   },
   {
-    tableName: "fazendas",
+    tableName: "estados",
     timestamps: true,
   }
 );
 
-Fazenda.sync()
+Estado.sync()
   .then(() => {
-    console.log('Tabela "fazendas" sincronizada com sucesso!');
+    console.log('Tabela "estados" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
   });
 
-module.exports = Fazenda;
+module.exports = Estado;

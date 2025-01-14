@@ -32,6 +32,44 @@ Este é um projeto de API para gerenciamento de safras.
    DB_DIALECT=mysql
    ```
 
+# Subir o banco de dados MYSQL pelo Docker
+
+## Requisitos
+
+- Docker
+
+## Instalação
+
+1. Instale a imagem do MySQL:
+
+   ```sh
+   docker pull mysql:latest
+   ```
+
+2. Crie um container com o MySQL:
+
+   ```sh
+   docker run --name mysql -e MYSQL_ROOT_PASSWORD=1234 -p 3306:3306 -d mysql:latest
+   ```
+
+3. Acessar o container:
+
+   ```sh
+   docker exec -it mysql bash
+   ```
+
+4. Acesse o MySQL:
+
+   ```sh
+   mysql -u root -p
+   ```
+
+5. Após inserir a senha, crie o banco de dados:
+
+   ```sql
+   CREATE DATABASE tagri;
+   ```
+
 ## Uso
 
 1. Inicie o servidor:
