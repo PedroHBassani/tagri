@@ -1,0 +1,36 @@
+### 
+@baseUrl = http://localhost:3000
+###
+
+### criar uma conta
+
+POST {{baseUrl}}/conta
+Content-Type: application/json
+
+{
+    "entidade_id": 1,
+    "nome": "Conta Corrente"
+}
+
+### atualizar uma conta
+
+PUT {{baseUrl}}/conta
+Content-Type: application/json
+
+{
+    "id": 2,
+    "entidade_id": 1,
+    "nome": "Conta Corrente"
+}
+
+### listar todas as contas
+
+GET {{baseUrl}}/conta
+
+### listar uma conta
+
+GET {{baseUrl}}/conta/1
+
+### deletar uma conta
+
+DELETE {{baseUrl}}/conta/1

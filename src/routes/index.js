@@ -9,6 +9,7 @@ const routes = (app) => {
 
   app.use("/agencia", require("./agenciaRouter.js"));
   app.use("/banco", require("./bancoRouter.js"));
+  app.use("/conta", require("./contaRouter.js"));
   app.use("/estado", require("./estadoRouter.js"));
   app.use("/fazenda", require("./fazendaRouter.js"));
   app.use("/municipio", require("./municipioRouter.js"));
