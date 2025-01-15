@@ -14,7 +14,13 @@ const atualizarUsuarioSchema = Joi.object({
   senha: Joi.string().min(6).max(100).required(),
 });
 
+const autenticarSchema = Joi.object({
+  login: Joi.string().min(2).max(100).required(),
+  senha: Joi.string().min(6).max(100).required(),
+});
+
 module.exports = {
   criarUsuarioSchema,
-  atualizarUsuarioSchema
+  atualizarUsuarioSchema,
+  autenticarSchema,
 };

@@ -79,3 +79,9 @@ Este é um projeto de API para gerenciamento de safras.
    ```
 
 2. Acesse a API em `http://localhost:3000`.
+
+## Requisições pelo Postman
+
+Para importar o arquivo `Tagri.postman_collection.json` no Postman.
+
+Import > files > Tagri.postman_collection.json.

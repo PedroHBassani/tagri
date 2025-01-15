@@ -4,6 +4,7 @@ const usuarioController = require("../controllers/usuarioController.js");
 const {
   criarUsuarioSchema,
   atualizarUsuarioSchema,
+  autenticarSchema,
 } = require("../schemas/usuarioSchema.js");
 
 const usuarioRouter = express.Router();
@@ -18,6 +19,12 @@ usuarioRouter.put(
   "/",
   validateSchema(atualizarUsuarioSchema),
   usuarioController.atualizar
+);
+
+usuarioRouter.post(
+  "/entrar",
+  validateSchema(autenticarSchema),
+  usuarioController.autenticar
 );
 
 module.exports = usuarioRouter;

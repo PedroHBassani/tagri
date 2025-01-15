@@ -1,0 +1,867 @@
+{
+	"info": {
+		"_postman_id": "74b8eb3f-c8b2-407f-b716-681749cb3508",
+		"name": "TAgri - Uno",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41095123"
+	},
+	"item": [
+		{
+			"name": "agencia",
+			"item": [
+				{
+					"name": "/agencia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"banco_id\": 1,\n    \"codigo\":\"00000\",\n    \"digito\":\"1\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/agencia",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agencia",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"banco_id\": 1,\n    \"codigo\":\"00000\",\n    \"digito\":\"1\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/agencia",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agencia",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/agencia",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agencia/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/agencia/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"agencia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "banco",
+			"item": [
+				{
+					"name": "/banco",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Banco do Brasil\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/banco",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"banco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/banco",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"Banco do Brasil\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/banco",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"banco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/banco",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/banco",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"banco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/banco/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/banco/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"banco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "conta",
+			"item": [
+				{
+					"name": "/conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"agencia_id\": 1,\n    \"numero\":\"12345\",\n    \"digito\":\"6\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/conta",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"conta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/conta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"agencia_id\": 1,\n    \"numero\":\"12345\",\n    \"digito\":\"6\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/conta",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"conta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/conta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/conta",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"conta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/conta/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/conta/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"conta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "estado",
+			"item": [
+				{
+					"name": "/estado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"São Paulo\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estado",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estado",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"São Paulo\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estado",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/estado",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estado/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/estado/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "fazenda",
+			"item": [
+				{
+					"name": "/fazenda",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Fazenda Boa Vista\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/fazenda",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"fazenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fazenda",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"Fazenda Boa Vista\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/fazenda",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"fazenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fazenda",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/fazenda",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"fazenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/fazenda/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/fazenda/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"fazenda",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "municipio",
+			"item": [
+				{
+					"name": "/municipio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Campinas\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/municipio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/municipio",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"Campinas\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/municipio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/municipio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/municipio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/municipio/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/municipio/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"municipio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "/usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva\",\n    \"email\": \"joao.silva@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/usuario",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/usuario/entrar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"token\", response.data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"joao.silva\",\n    \"senha\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/usuario/entrar",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuario",
+								"entrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"João Silva\",\n    \"email\": \"joao.silva@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/usuario",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/usuario",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/usuario/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/usuario/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

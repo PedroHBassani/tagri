@@ -1,5 +1,6 @@
 const Usuario = require("../models/usuarioModel.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   async criar({ nome, login, senha }) {
@@ -30,11 +31,12 @@ module.exports = {
     if (jaExiste && jaExiste.id !== usuario.id) {
       throw new Error("Nome de usuário em uso.");
     }
+    const novaSenha = await bcrypt.hash(usuario.senha, 10);
     await Usuario.update(
       {
         nome: usuario.nome,
         login: usuario.login,
-        senha: usuario.senha,
+        senha: novaSenha,
       },
       { where: { id: usuario.id }, returning: true }
     );
@@ -49,7 +51,16 @@ module.exports = {
     if (!(await bcrypt.compare(senha, usuario.senha))) {
       throw new Error("Senha inválida.");
     }
-    return usuario;
+    usuario.ultimo_acesso = new Date();
+    
+    const token = jwt.sign(
+      { id: usuario.id, login: usuario.login },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    await usuario.save();
+
+    return { usuario, token };
   },
 
   async pegarPeloLogin(login) {
