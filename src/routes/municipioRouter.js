@@ -18,7 +18,6 @@ municipioRouter.put(
   municipioController.atualizar
 );
 
-
 municipioRouter.get("/paginate", municipioController.listarFe);
 
 municipioRouter.get("/:id", 

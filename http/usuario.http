@@ -1,0 +1,26 @@
+### 
+@baseUrl = http://localhost:3000
+###
+
+### criar um usuário
+
+POST {{baseUrl}}/usuario
+Content-Type: application/json
+
+{
+    "login": "joao.silva",
+    "senha": "123456",
+    "nome": "João da Silva"
+}
+
+### atualizar um usuário
+
+PUT {{baseUrl}}/usuario
+Content-Type: application/json
+
+{
+    "id": 1,
+    "login": "joao.silva",
+    "senha": "123456",
+    "nome": "João da Silva"
+}

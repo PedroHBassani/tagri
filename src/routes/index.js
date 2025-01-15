@@ -5,6 +5,10 @@ const routes = (app) => {
     return success(res, "Agro finance API");
   });
 
+  app.use("/usuario", require("./usuarioRouter.js"));
+
+  app.use("/agencia", require("./agenciaRouter.js"));
+  app.use("/banco", require("./bancoRouter.js"));
   app.use("/estado", require("./estadoRouter.js"));
   app.use("/fazenda", require("./fazendaRouter.js"));
   app.use("/municipio", require("./municipioRouter.js"));

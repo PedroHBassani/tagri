@@ -1,0 +1,32 @@
+### 
+@baseUrl = http://localhost:3000
+###
+
+### criar um banco
+
+POST {{baseUrl}}/banco
+Content-Type: application/json
+
+{
+    "nome": "Banco do Brasil",
+    "codigo": "001"
+}
+
+### atualizar um banco
+
+PUT {{baseUrl}}/banco
+Content-Type: application/json
+
+{
+    "id": 2,
+    "nome": "Caixa Econômica Federal",
+    "codigo": "104"
+}
+
+### listar todos os bancos
+
+GET {{baseUrl}}/banco
+
+### buscar um banco
+
+GET {{baseUrl}}/banco/1

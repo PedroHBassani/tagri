@@ -1,0 +1,34 @@
+### 
+@baseUrl = http://localhost:3000
+###
+
+### criar uma agencia
+
+POST {{baseUrl}}/agencia
+Content-Type: application/json
+
+{
+    "banco_id": 1,
+    "codigo":"00000",
+    "digito":"1"
+}
+
+### atualizar uma agencia
+
+PUT {{baseUrl}}/agencia
+Content-Type: application/json
+
+{
+    "id": 2,
+    "banco_id": 1,
+    "codigo":"00000",
+    "digito":"1"
+}
+
+### listar todas as agencias
+
+GET {{baseUrl}}/agencia
+
+### listar uma agencia
+
+GET {{baseUrl}}/agencia/1
