@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
+const Entidade = require("./entidadeModel.js");
 
 const Usuario = sequelize.define(
   "Usuario",
@@ -12,10 +13,10 @@ const Usuario = sequelize.define(
     pessoa_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-        // references: {
-        //   model: Pessoa,
-        //   key: "id",
-        // },
+        references: {
+          model: Entidade,
+          key: "id",
+        },
     },
     login: {
       type: DataTypes.STRING,

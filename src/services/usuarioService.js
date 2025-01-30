@@ -1,6 +1,8 @@
 const Usuario = require("../models/usuarioModel.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Entidade = require("../models/entidadeModel.js");
+const Pessoa = require("../models/pessoaModel.js");
 
 module.exports = {
   async criar({ nome, login, senha }) {
@@ -9,10 +11,11 @@ module.exports = {
       throw new Error("Nome de usuário em uso.");
     }
     const novaSenha = await bcrypt.hash(senha, 10);
-    const pessoa_id = 1;
+    const pessoa_id = await Pessoa.create({ nome, data_nascimento: new Date() });
+    const entidade_id = await Entidade.create({ pessoa_id: pessoa_id.id }).id;
     const ultimo_acesso = new Date();
     return await Usuario.create({
-      pessoa_id,
+      pessoa_id: entidade_id,
       nome,
       login,
       senha: novaSenha,
@@ -52,7 +55,7 @@ module.exports = {
       throw new Error("Senha inválida.");
     }
     usuario.ultimo_acesso = new Date();
-    
+
     const token = jwt.sign(
       { id: usuario.id, login: usuario.login },
       process.env.JWT_SECRET,
