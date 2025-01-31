@@ -18,6 +18,7 @@ const routes = (app) => {
   app.use("/municipio", require("./municipioRouter.js"));
   app.use("/pessoas", require("./pessoaRouter.js"));
   app.use("/estoque", require("./estoqueRouter.js"));
+  app.use("/tipo", require("./tipoRouter.js"));
 
   app.use((req, res) => {
     return error(res, "Rota não encontrada", 404);
