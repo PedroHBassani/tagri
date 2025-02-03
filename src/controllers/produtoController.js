@@ -66,14 +66,14 @@ module.exports = {
   },
 
   async paginate(req, res) {
-    const { tipo_id, nome, state, pagination } = req.body;
+    const { tipo_id, nome, page, limit } = req.query;
 
     try {
       const produtos = await produtoService.paginate(
         tipo_id,
         nome,
-        state,
-        pagination
+        page,
+        limit
       );
       success(res, "", produtos);
     } catch (err) {

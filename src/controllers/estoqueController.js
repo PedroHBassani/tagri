@@ -21,8 +21,7 @@ module.exports = {
     }
   },
   async atualizar(req, res) {
-    const { id } = req.params;
-    const { nome, entidade_id } = req.body;
+    const { id, nome, entidade_id } = req.body;
     try {
       const estoque = await estoqueService.atualizar({ id, nome, entidade_id });
       success(res, "", estoque);
@@ -40,7 +39,7 @@ module.exports = {
     }
   },
   async listarPelaEntidade(req, res) {
-    const { entidade_id } = req.params;
+    const { entidade_id } = req.query;
     try {
       const estoques = await estoqueService.listarPelaEntidade(entidade_id);
       success(res, "", estoques);

@@ -22,14 +22,21 @@ estoqueRouter.put(
   estoqueController.atualizar
 );
 
-estoqueRouter.get("/:id", validateSchema(pegarSchema), estoqueController.pegar);
+estoqueRouter.get(
+  "/",
+  validateSchema(listarSchema, "query"),
+  estoqueController.listarPelaEntidade
+);
+estoqueRouter.get(
+  "/:id",
+  validateSchema(pegarSchema, "params"),
+  estoqueController.pegar
+);
 
 estoqueRouter.delete(
   "/:id",
   validateSchema(pegarSchema),
   estoqueController.deletar
 );
-
-estoqueRouter.get("/", validateSchema(listarSchema), estoqueController.listarPelaEntidade);
 
 module.exports = estoqueRouter;

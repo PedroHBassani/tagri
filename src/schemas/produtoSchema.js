@@ -16,7 +16,15 @@ const atualizarProdutoSchema = Joi.object({
   descricao: Joi.string().min(2).max(100).optional(),
 });
 
+const paginateSchema = Joi.object({
+  tipo_id: idSchema.optional(),
+  nome: Joi.string().min(2).max(100).optional(),
+  page: Joi.number().min(1).default(1).optional(),
+  limit: Joi.number().min(1).default(15).optional(),
+})
+
 module.exports = {
   criarProdutoSchema,
   atualizarProdutoSchema,
+  paginateSchema,
 };

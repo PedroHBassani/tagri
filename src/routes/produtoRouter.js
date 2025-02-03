@@ -5,6 +5,7 @@ const { pegarSchema } = require("../schemas/commonSchema.js");
 const {
   criarProdutoSchema,
   atualizarProdutoSchema,
+  paginateSchema,
 } = require("../schemas/produtoSchema.js");
 
 const produtoRouter = express.Router();
@@ -15,11 +16,7 @@ produtoRouter.post(
   produtoController.criar
 );
 
-produtoRouter.get(
-  "/{id}",
-  validateSchema(pegarSchema, "params"),
-  produtoController.pegar
-);
+produtoRouter.get("/", produtoController.listar);
 
 produtoRouter.put(
   "/",
@@ -28,15 +25,19 @@ produtoRouter.put(
 );
 
 produtoRouter.delete(
-  "/{id}",
+  "/:id",
   validateSchema(pegarSchema, "params"),
   produtoController.deletar
 );
 
-produtoRouter.get("/", produtoController.listar);
-produtoRouter.get("/paginate", produtoController.paginate);
+produtoRouter.get("/paginate", validateSchema(paginateSchema, "query"), produtoController.paginate);
 produtoRouter.get("/tipos", produtoController.listar_tipos);
 produtoRouter.get("/para-plantar", produtoController.listar_para_plantar);
+produtoRouter.get(
+  "/:id",
+  validateSchema(pegarSchema, "params"),
+  produtoController.pegar
+);
 // produtoRouter.get(
 //   "/utilizar-safra",
 //   produtoController.listar_para_utilizar_safra

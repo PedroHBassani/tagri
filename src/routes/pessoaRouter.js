@@ -5,6 +5,6 @@ const pessoaController = require("../controllers/pessoaController.js");
 
 const pessoaRouter = express.Router();
 
-pessoaRouter.get("/", validateSchema(filtarPessoas), pessoaController.criar);
+pessoaRouter.get("/", validateSchema(filtarPessoas), pessoaController.listarComFiltro);
 
 module.exports = pessoaRouter;

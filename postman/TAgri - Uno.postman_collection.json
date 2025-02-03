@@ -447,6 +447,122 @@
 			]
 		},
 		{
+			"name": "estoque",
+			"item": [
+				{
+					"name": "/estoque",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"entidade_id\": 1,\n    \"nome\": \"Estoque 1\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estoque",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estoque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estoque",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"entidade_id\": 1,\n    \"nome\": \"Estoque\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/estoque",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estoque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estoque",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/estoque?entidade_id=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estoque"
+							],
+							"query": [
+								{
+									"key": "entidade_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/estoque/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/estoque/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"estoque",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "fazenda",
 			"item": [
 				{
@@ -667,6 +783,251 @@
 			]
 		},
 		{
+			"name": "pessoa",
+			"item": [
+				{
+					"name": "/pessoa",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/pessoas?id=1&nome=Teste",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoas"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "nome",
+									"value": "Teste"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "produto",
+			"item": [
+				{
+					"name": "/produto",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo_id\": 1,\r\n    \"unidade_medida_id\": 1,\r\n    \"nome\": \"Produto 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/produto",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tipo_id\": 1,\r\n    \"unidade_medida_id\": 1,\r\n    \"nome\": \"Produto 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/produto",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto/paginate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto/paginate",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto",
+								"paginate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto/tipos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto/tipos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto",
+								"tipos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto/para-plantar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto/para-plantar",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto",
+								"para-plantar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/produto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/produto/12",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"produto",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "usuario",
 			"item": [
 				{
@@ -685,7 +1046,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"João Silva\",\n    \"email\": \"joao.silva@example.com\"\n}"
+							"raw": "{\n    \"login\": \"joao.silva\",\n    \"senha\": \"123456\",\n    \"nome\": \"João Silva\"\n}"
 						},
 						"url": {
 							"raw": "{{URL}}/usuario",
