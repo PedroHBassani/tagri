@@ -1,5 +1,4 @@
 const Estado = require("../models/estadoModel.js");
-const { pegar, atualizar } = require("./municipioService.js");
 
 module.exports = {
   async criar({ nome, sigla }) {

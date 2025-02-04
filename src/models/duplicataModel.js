@@ -10,6 +10,7 @@ const {
   ReferenceType,
 } = require("../utils/modelTypes.js");
 const Usuario = require("./usuarioModel.js");
+const Moeda = require("./moedaModel.js");
 
 const Duplicata = sequelize.define(
   "Duplicata",
@@ -22,10 +23,7 @@ const Duplicata = sequelize.define(
     centro_custo_id: ReferenceType(CentroCusto),
     entidade_id: ReferenceType(Entidade),
     conta_id: ReferenceType(Conta),
-    moeda_id: {
-      ...IntegerType,
-      // TODO: Adicionar a referencia
-    },
+    moeda_id: ReferenceType(Moeda),
     pessoa_id: ReferenceType(Pessoa),
     usuario_id: ReferenceType(Usuario),
     numero_parcelas: IntegerType,

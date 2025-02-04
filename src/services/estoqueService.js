@@ -1,5 +1,4 @@
 const Estoque = require("../models/estoqueModel.js");
-const { atualizar } = require("./municipioService.js");
 
 module.exports = {
   async criar({ nome, entidade_id }) {

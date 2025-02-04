@@ -1,8 +1,3 @@
-const {
-  atualizar,
-  paginate,
-  listar_para_plantar,
-} = require("../controllers/produtoController.js");
 const Produto = require("../models/produtoModel.js");
 const { Op } = require("sequelize");
 
