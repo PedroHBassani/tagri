@@ -17,14 +17,14 @@ const SafraUsoProduto = sequelize.define(
     descricao: OptionalString,
   },
   {
-    tableName: "safaUsoProduto",
+    tableName: "safra_uso_produto",
     timestamps: false,
   }
 );
 
 SafraUsoProduto.sync()
   .then(() => {
-    console.log('Tabela "safaUsoProduto" sincronizada com sucesso!');
+    console.log('Tabela "safra_uso_produto" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

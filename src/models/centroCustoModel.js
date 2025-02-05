@@ -33,14 +33,14 @@ const CentroCusto = sequelize.define(
     },
   },
   {
-    tableName: "centroCusto",
-    timestamps: true,
+    tableName: "centro_custo",
+    timestamps: false,
   }
 );
 
 CentroCusto.sync()
   .then(() => {
-    console.log('Tabela "centroCusto" sincronizada com sucesso!');
+    console.log('Tabela "centro_custo" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

@@ -55,7 +55,7 @@ const Duplicata = sequelize.define(
   },
   {
     tableName: "duplicatas",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

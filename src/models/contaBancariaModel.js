@@ -50,14 +50,14 @@ const ContaBancaria = sequelize.define(
     },
   },
   {
-    tableName: "contaBancarias",
-    timestamps: true,
+    tableName: "conta_bancaria",
+    timestamps: false,
   }
 );
 
 ContaBancaria.sync()
   .then(() => {
-    console.log('Tabela "contaBancarias" sincronizada com sucesso!');
+    console.log('Tabela "conta_bancaria" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

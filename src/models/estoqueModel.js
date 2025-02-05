@@ -20,7 +20,7 @@ const Estoque = sequelize.define(
   },
   {
     tableName: "estoques",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

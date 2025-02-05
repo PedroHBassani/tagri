@@ -20,7 +20,7 @@ const Banco = sequelize.define(
   },
   {
     tableName: "bancos",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

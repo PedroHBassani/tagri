@@ -24,7 +24,7 @@ const Moeda = sequelize.define(
   },
   {
     tableName: "moedas",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

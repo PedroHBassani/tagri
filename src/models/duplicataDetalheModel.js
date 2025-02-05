@@ -16,14 +16,14 @@ const DuplicataDetalhe = sequelize.define(
     produto_id: ReferenceType(Produto),
   },
   {
-    tableName: "duplicatasDetalhes",
-    timestamps: true,
+    tableName: "duplicatas_detalhes",
+    timestamps: false,
   }
 );
 
 DuplicataDetalhe.sync()
   .then(() => {
-    console.log('Tabela "duplicatasDetalhes" sincronizada com sucesso!');
+    console.log('Tabela "duplicatas_detalhes" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

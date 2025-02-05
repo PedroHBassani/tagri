@@ -20,7 +20,7 @@ const Estado = sequelize.define(
   },
   {
     tableName: "estados",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

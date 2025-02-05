@@ -20,7 +20,7 @@ const Fazenda = sequelize.define(
   },
   {
     tableName: "fazendas",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

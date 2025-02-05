@@ -26,7 +26,7 @@ const Municipio = sequelize.define(
   },
   {
     tableName: "municipios",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

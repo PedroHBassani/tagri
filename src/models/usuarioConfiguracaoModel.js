@@ -22,14 +22,14 @@ const UsuarioConfiguracao = sequelize.define(
     },
   },
   {
-    tableName: "usuariosConfiguracao",
+    tableName: "usuarios_configuracoes",
     timestamps: false,
   }
 );
 
 UsuarioConfiguracao.sync()
   .then(() => {
-    console.log('Tabela "usuariosConfiguracao" sincronizada com sucesso!');
+    console.log('Tabela "usuarios_configuracoes" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

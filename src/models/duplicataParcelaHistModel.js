@@ -39,14 +39,14 @@ const DuplicataParcelaHist = sequelize.define(
     },
   },
   {
-    tableName: "duplicataParcelaHist",
-    timestamps: true,
+    tableName: "duplicata_parcela_hist",
+    timestamps: false,
   }
 );
 
 DuplicataParcelaHist.sync()
   .then(() => {
-    console.log('Tabela "duplicataParcelaHist" sincronizada com sucesso!');
+    console.log('Tabela "duplicata_parcela_hist" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

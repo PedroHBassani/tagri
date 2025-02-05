@@ -1,11 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  ReferenceType,
-  OptionalString,
-  BooleanType,
-} = require("../utils/modelTypes.js");
-const Safra = require("./safraModel.js");
+const { ReferenceType, BooleanType } = require("../utils/modelTypes.js");
 const Pessoa = require("./pessoaModel.js");
 
 const Telefone = sequelize.define(

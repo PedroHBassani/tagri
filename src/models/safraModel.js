@@ -9,6 +9,7 @@ const {
 } = require("../utils/modelTypes.js");
 const Entidade = require("./entidadeModel.js");
 const Fazenda = require("./fazendaModel.js");
+const CentroCusto = require("./centroCustoModel.js");
 
 const Safra = sequelize.define(
   "Safra",

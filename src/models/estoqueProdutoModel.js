@@ -33,14 +33,14 @@ const EstoqueProduto = sequelize.define(
     criado_as: CriadoAsType,
   },
   {
-    tableName: "estoquesProdutos",
-    timestamps: true,
+    tableName: "estoques_produtos",
+    timestamps: false,
   }
 );
 
 EstoqueProduto.sync()
   .then(() => {
-    console.log('Tabela "estoquesProdutos" sincronizada com sucesso!');
+    console.log('Tabela "estoques_produtos" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

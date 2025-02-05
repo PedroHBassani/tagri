@@ -27,9 +27,10 @@ const BooleanType = {
 };
 
 const ReferenceType = (model) => ({
-  ...IntegerType,
+  type: DataTypes.INTEGER,
+  allowNull: false,
   references: {
-    model,
+    model: model,
     key: "id",
   },
 });

@@ -70,6 +70,12 @@ Este é um projeto de API para gerenciamento de safras.
    CREATE DATABASE tagri;
    ```
 
+6. Para sincronizar as tabelas:
+
+   ```js
+   node .\src\models\sync.js
+   ```
+
 ## Uso
 
 1. Inicie o servidor:

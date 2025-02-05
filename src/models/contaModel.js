@@ -24,7 +24,7 @@ const Conta = sequelize.define(
   },
   {
     tableName: "contas",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

@@ -15,7 +15,7 @@ const Pessoa = sequelize.define(
     },
     data_nascimento: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
+        allowNull: true,
     },
   },
   {

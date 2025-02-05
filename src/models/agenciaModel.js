@@ -29,7 +29,7 @@ const Agencia = sequelize.define(
   },
   {
     tableName: "agencias",
-    timestamps: true,
+    timestamps: false,
   }
 );
 

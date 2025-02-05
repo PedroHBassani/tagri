@@ -11,7 +11,14 @@ const PessoaJuridica = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    pessoa_id: ReferenceType(Pessoa),
+    pessoa_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Pessoa,
+        key: "id",
+      },
+    },
     razao_social: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,14 +29,14 @@ const PessoaJuridica = sequelize.define(
     },
   },
   {
-    tableName: "pessoaJuridica",
-    timestamps: true,
+    tableName: "pessoa_juridicas",
+    timestamps: false,
   }
 );
 
 PessoaJuridica.sync()
   .then(() => {
-    console.log('Tabela "pessoaJuridica" sincronizada com sucesso!');
+    console.log('Tabela "pessoa_juridicas" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);

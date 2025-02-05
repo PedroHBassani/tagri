@@ -15,12 +15,12 @@ module.exports = {
   },
 
   async atualizar(id, duplicataParcela) {
-    const duplicataParcela = await DuplicataParcela.findByPk(id);
-    if (!duplicataParcela) {
+    const antiga = await DuplicataParcela.findByPk(id);
+    if (!antiga) {
       throw new Error("DuplicataParcela não encontrada");
     }
-    await duplicataParcela.update(duplicataParcela);
-    return duplicataParcela;
+    await antiga.update(duplicataParcela);
+    return antiga;
   },
 
   async deletar(id) {

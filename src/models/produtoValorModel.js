@@ -28,14 +28,14 @@ const ProdutoValor = sequelize.define(
     },
   },
   {
-    tableName: "produtoValor",
+    tableName: "produto_valor",
     timestamps: false,
   }
 );
 
 ProdutoValor.sync()
   .then(() => {
-    console.log('Tabela "produtoValor" sincronizada com sucesso!');
+    console.log('Tabela "produto_valor" sincronizada com sucesso!');
   })
   .catch((error) => {
     console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
