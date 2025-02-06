@@ -1,9 +1,20 @@
 const sequelize = require("../config/database.js");
+const readline = require("readline");
+const colors = require("colors");
 
-const sendMessage = (message) => {
-  console.log("================================================")
-  console.log(message);
-  console.log("================================================")
+var passo = 1;
+
+const sendMessage = (message, type = "info") => {
+  const color =
+    type === "success" ? "green" : type === "error" ? "red" : "yellow";
+  console.log(colors.zebra(passo.toString()) + " " + colors[color](message));
+  passo++;
+};
+
+const updateProgress = (message, percent) => {
+  readline.clearLine(process.stdout, 0);
+  readline.cursorTo(process.stdout, 0);
+  process.stdout.write(colors.yellow(`${message} ${percent.toFixed(2)}%`));
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -71,17 +82,18 @@ const importAndSyncModels = async () => {
     importedModels.push(model);
   }
 
-
   await sequelize.sync({ force: true, models: importedModels });
 };
 
+const formatarSql = (sql) => sql.replace(/\n/g, " ").replace(/\s+/g, " ");
+
 const init = async () => {
   try {
-  
-    await sleep(500);
-    sendMessage("Removendo chaves estrangeiras.");
+    sendMessage("Iniciando processo de sincronização...");
 
-  
+    await sleep(500);
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0;");
+    sendMessage("Removendo chaves estrangeiras...");
     const foreignKeys = await getForeignKeys("entidades");
     for (const fk of foreignKeys) {
       if (fk.CONSTRAINT_NAME !== "PRIMARY") {
@@ -89,16 +101,11 @@ const init = async () => {
       }
     }
 
-    sendMessage("Chaves estrangeiras removidas com sucesso!");
     await sleep(500);
+    sendMessage("Remoção de chaves estrangeiras concluída.", "success");
 
-  
-    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0;");
-
-    sendMessage("Iniciando a deleção de tabelas!");
     await sleep(500);
-
-  
+    sendMessage("Iniciando a deleção de tabelas...");
     const tables = await sequelize.query(`
       SELECT TABLE_NAME
       FROM information_schema.TABLES
@@ -106,7 +113,6 @@ const init = async () => {
     `);
     const tabelas = tables[0].map((t) => t.TABLE_NAME);
 
-  
     for (const m of models) {
       const model = require(m);
       if (tabelas.includes(model.tableName)) {
@@ -114,25 +120,39 @@ const init = async () => {
       }
     }
 
-    sendMessage("Tabelas deletadas com sucesso!");
     await sleep(500);
+    sendMessage("Tabelas deletadas com sucesso!", "success");
 
-  
     await importAndSyncModels();
-
-    sendMessage("Modelos sincronizados com sucesso!");
-    await sleep(500);
-
-  
     await sequelize.query("SET FOREIGN_KEY_CHECKS = 1;");
 
-    sendMessage("Sincronização concluída!");
+    sendMessage("Modelos sincronizados com sucesso!", "success");
 
-  
     await sleep(500);
-    adicionarDados();
+    sendMessage("Inserindo dados...");
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0;");
+
+    let percent = 100 / sqls.length;
+    const transaction = await sequelize.transaction();
+    for (let i = 0; i < sqls.length; i++) {
+      const sql = sqls[i];
+      updateProgress("Inserindo valores...", percent * (i + 1));
+      await sequelize.query(formatarSql(sql), { transaction });
+      await sleep(400);
+    }
+    console.log();
+    await transaction.commit();
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 1;");
+    sendMessage("Dados inseridos com sucesso!", "success");
+
+    sendMessage(
+      "Sincronização e inserção de dados concluída com sucesso!",
+      "success"
+    );
   } catch (error) {
-    console.error("Erro ao sincronizar tabelas:", error);
+    sendMessage(`Erro ao sincronizar tabelas: ${error.message}`, "error");
+  } finally {
+    process.exit();
   }
 };
 
@@ -142,32 +162,5 @@ const sqls = [
   ...require("../config/sql/produtos.js"),
   ...require("../config/sql/dadosTestes.js"),
 ];
-
-const formatarSql = (sql) => sql.replace(/\n/g, " ").replace(/\s+/g, " ");
-
-const adicionarDados = async () => {
-  const transaction = await sequelize.transaction();
-  try {
-    sendMessage("Inserindo dados...");
-    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0;");
-    var percent = 100 / sqls.length;
-    for (var i in sqls) {
-      const sql = sqls[i];
-      console.log(
-        `${(percent * i + percent).toFixed(2)}% - Inserindo valores.`
-      );
-      await sequelize.query(formatarSql(sql), { transaction });
-      await sleep(400);
-    }
-    await transaction.commit();
-    await sequelize.query("SET FOREIGN_KEY_CHECKS = 1;");
-    sendMessage("SQL executado com sucesso!");
-  } catch (error) {
-    await transaction.rollback();
-    console.error("Erro ao executar SQL:", error);
-  } finally {
-    process.exit(0);
-  }
-};
 
 init();
