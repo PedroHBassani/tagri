@@ -1,5 +1,5 @@
 const sequelize = require("../config/database.js");
-const readline = require("readline");
+const { clearLine, cursorTo } = require("readline");
 const colors = require("colors");
 
 var passo = 1;
@@ -12,8 +12,8 @@ const sendMessage = (message, type = "info") => {
 };
 
 const updateProgress = (message, percent) => {
-  readline.clearLine(process.stdout, 0);
-  readline.cursorTo(process.stdout, 0);
+  clearLine(process.stdout, 0);
+  cursorTo(process.stdout, 0);
   process.stdout.write(colors.yellow(`${message} ${percent.toFixed(2)}%`));
 };
 
