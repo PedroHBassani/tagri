@@ -7,7 +7,7 @@ var passo = 1;
 const sendMessage = (message, type = "info") => {
   const color =
     type === "success" ? "green" : type === "error" ? "red" : "yellow";
-  console.log(colors.zebra(passo.toString()) + " " + colors[color](message));
+  console.log(colors.cyan(passo + "º") + " " + colors[color](message));
   passo++;
 };
 
