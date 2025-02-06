@@ -4,11 +4,6 @@ const CentroCusto = require("./centroCustoModel.js");
 const Entidade = require("./entidadeModel.js");
 const Conta = require("./contaModel.js");
 const Pessoa = require("./pessoaModel.js");
-const {
-  IntegerType,
-  DecimalType,
-  ReferenceType,
-} = require("../utils/modelTypes.js");
 const Usuario = require("./usuarioModel.js");
 const Moeda = require("./moedaModel.js");
 
@@ -20,25 +15,94 @@ const Duplicata = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    centro_custo_id: ReferenceType(CentroCusto),
-    entidade_id: ReferenceType(Entidade),
-    conta_id: ReferenceType(Conta),
-    moeda_id: ReferenceType(Moeda),
-    pessoa_id: ReferenceType(Pessoa),
-    usuario_id: ReferenceType(Usuario),
-    numero_parcelas: IntegerType,
-    numero_parcelas_abertas: IntegerType,
-    valor_cobrado: DecimalType,
-    valor_pago: DecimalType,
-    valor_multa: DecimalType,
-    valor_juros: DecimalType,
-    valor_desconto: DecimalType,
-    valor_aberto: DecimalType,
+    centro_custo_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: CentroCusto,
+        key: "id",
+      },
+    },
+    entidade_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Entidade,
+        key: "id",
+      },
+    },
+    conta_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Conta,
+        key: "id",
+      },
+    },
+    moeda_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Moeda,
+        key: "id",
+      },
+    },
+    pessoa_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Pessoa,
+        key: "id",
+      },
+    },
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Usuario,
+        key: "id",
+      },
+    },
+    numero_parcelas: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    numero_parcelas_abertas: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    valor_cobrado: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_pago: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_multa: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_juros: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_desconto: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_aberto: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     status: {
       type: DataTypes.STRING(16),
       allowNull: false,
     },
-    sinal: IntegerType,
+    sinal: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     data_lancamento: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -58,13 +122,5 @@ const Duplicata = sequelize.define(
     timestamps: false,
   }
 );
-
-Duplicata.sync()
-  .then(() => {
-    console.log('Tabela "duplicatas" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = Duplicata;

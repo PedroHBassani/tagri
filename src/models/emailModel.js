@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
 const Pessoa = require("./pessoaModel.js");
-const { ReferenceType } = require("../utils/modelTypes.js");
 
 const Email = sequelize.define(
   "Email",
@@ -11,8 +10,14 @@ const Email = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-
-    pessoa_id: ReferenceType(Pessoa),
+    pessoa_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Pessoa,
+        key: "id",
+      },
+    },
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -28,13 +33,5 @@ const Email = sequelize.define(
     timestamps: false,
   }
 );
-
-Email.sync()
-  .then(() => {
-    console.log('Tabela "emails" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = Email;

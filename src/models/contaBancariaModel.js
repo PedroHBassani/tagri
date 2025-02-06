@@ -55,12 +55,4 @@ const ContaBancaria = sequelize.define(
   }
 );
 
-ContaBancaria.sync()
-  .then(() => {
-    console.log('Tabela "conta_bancaria" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = ContaBancaria;

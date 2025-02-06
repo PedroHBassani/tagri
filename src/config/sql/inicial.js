@@ -37,10 +37,18 @@ INSERT INTO bancos (codigo, nome) VALUES
     (197, 'Banco Stone');
 `;
 
-const clientesFornecedores = `INSERT INTO cliente_fornecedores (pessoa_id) VALUES (5);`;
-const pessoas = `INSERT INTO pessoas (nome) VALUES ('Root'), ('Lucas'), ('Teste entidade 1'), ('Teste entidade 2'), ('Unochapecó');`;
-const pessoasFisicas = `INSERT INTO pessoa_fisicas (pessoa_id, sobrenome, cpf) VALUES (1, 'Root', '12345678901'), (2, 'Tafarel', '8168847903');`;
-const pessoasJuridicas = `INSERT INTO pessoa_juridicas (pessoa_id, razao_social, cnpj) VALUES (5, 'Universidade Comunitária da Região de Chapecó', '82804642000108');`;
+const pessoas = `
+  insert into pessoas (nome) values ('Root'), ('Lucas'), ('Teste entidade 1'), ('Teste entidade 2'), ('Unochapecó');
+`;
+
+const pessoasFisicas = `
+  insert into pessoa_fisicas (pessoa_id, sobrenome, cpf) values (2, 'Tafarel', '8168847903');
+`;
+
+const pessoasJuridicas = `
+  insert into pessoa_juridicas (pessoa_id, razao_social, cnpj) values (5, 'Universidade Comunitária da Região de Chapecó', '82804642000108');
+`;
+
 const entidades = `INSERT INTO entidades (pessoa_id) VALUES (3), (4);`;
 
 const usuarios = `
@@ -49,13 +57,19 @@ const usuarios = `
     (2, 'lucas@tafarel.com.br', '$2b$12$KyKaNFWx4L7UAW95bqZPCuwSpaBxslgsfJMDjylQtJq0SaoDBRPb2', now(), now(), now());
 `;
 
-const usuarioEntidades = `INSERT INTO usuario_entidades (usuario_id, entidade_id) VALUES (1, 1), (2, 2);`;
+const usuarioEntidades = `
+  INSERT INTO usuario_entidades (usuario_id, entidade_id) VALUES (1, 1), (2, 2);
+`;
+
 const moedas = `INSERT INTO moedas (nome, nome_plural, sigla) VALUES ('Real', 'Reais', 'R$');`;
+
+const clientesFornecedores = `
+  INSERT INTO cliente_fornecedores (pessoa_id) VALUES (5);
+`;
 
 module.exports = [
   tipos,
   bancos,
-  clientesFornecedores,
   pessoas,
   pessoasFisicas,
   pessoasJuridicas,
@@ -63,4 +77,5 @@ module.exports = [
   usuarios,
   usuarioEntidades,
   moedas,
+  clientesFornecedores,
 ];

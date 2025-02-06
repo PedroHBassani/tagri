@@ -1,11 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  ReferenceType,
-  DateType,
-  IntegerType,
-  DecimalType,
-} = require("../utils/modelTypes.js");
 const Duplicata = require("./duplicataModel.js");
 
 const DuplicataParcela = sequelize.define(
@@ -16,15 +10,46 @@ const DuplicataParcela = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    duplicata_id: ReferenceType(Duplicata),
-    data_vencimento: DateType,
-    numero_parcela: IntegerType,
-    valor_cobrado: DecimalType,
-    valor_pago: DecimalType,
-    valor_multa: DecimalType,
-    valor_juros: DecimalType,
-    valor_desconto: DecimalType,
-    valor_aberto: DecimalType,
+    duplicata_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Duplicata,
+        key: "id",
+      },
+    },
+    data_vencimento: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    numero_parcela: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    valor_cobrado: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_pago: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_multa: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_juros: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_desconto: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_aberto: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     status: {
       type: DataTypes.STRING(16),
       allowNull: false,
@@ -45,13 +70,5 @@ const DuplicataParcela = sequelize.define(
     timestamps: false,
   }
 );
-
-DuplicataParcela.sync()
-  .then(() => {
-    console.log('Tabela "duplicatas_parcelas" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = DuplicataParcela;

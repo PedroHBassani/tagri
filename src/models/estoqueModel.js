@@ -24,12 +24,4 @@ const Estoque = sequelize.define(
   }
 );
 
-Estoque.sync()
-  .then(() => {
-    console.log('Tabela "estoques" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = Estoque;

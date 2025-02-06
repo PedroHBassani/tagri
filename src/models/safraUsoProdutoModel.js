@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const { ReferenceType, OptionalString } = require("../utils/modelTypes.js");
 const Safra = require("./safraModel.js");
 
 const SafraUsoProduto = sequelize.define(
@@ -11,23 +10,32 @@ const SafraUsoProduto = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    safra_id: ReferenceType(Safra),
-    pratica_agricola_id: DataTypes.INTEGER,
-    lancamento_baixa_estoque_id: DataTypes.INTEGER,
-    descricao: OptionalString,
+    safra_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Safra,
+        key: "id",
+      },
+    },
+    pratica_agricola_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    lancamento_baixa_estoque_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    descricao: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "",
+    },
   },
   {
-    tableName: "safra_uso_produto",
+    tableName: "safra_uso_produtos",
     timestamps: false,
   }
 );
-
-SafraUsoProduto.sync()
-  .then(() => {
-    console.log('Tabela "safra_uso_produto" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = SafraUsoProduto;

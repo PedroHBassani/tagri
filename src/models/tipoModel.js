@@ -43,12 +43,4 @@ const Tipo = sequelize.define(
   }
 );
 
-Tipo.sync()
-  .then(() => {
-    console.log('Tabela "tipos" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = Tipo;

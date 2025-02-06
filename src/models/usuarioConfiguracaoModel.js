@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const { ReferenceType } = require("../utils/modelTypes.js");
 const Usuario = require("./usuarioModel.js");
 
 const UsuarioConfiguracao = sequelize.define(
@@ -11,7 +10,14 @@ const UsuarioConfiguracao = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    usuario_id: ReferenceType(Usuario),
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Usuario,
+        key: "id",
+      },
+    },
     chave: {
       type: DataTypes.STRING(50),
       allowNull: false,
@@ -26,13 +32,5 @@ const UsuarioConfiguracao = sequelize.define(
     timestamps: false,
   }
 );
-
-UsuarioConfiguracao.sync()
-  .then(() => {
-    console.log('Tabela "usuarios_configuracoes" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = UsuarioConfiguracao;

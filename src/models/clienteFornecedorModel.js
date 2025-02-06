@@ -35,12 +35,4 @@ const ClienteFornecedorModel = sequelize.define(
   }
 );
 
-ClienteFornecedorModel.sync()
-  .then(() => {
-    console.log('Tabela "cliente_fornecedores" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = ClienteFornecedorModel;

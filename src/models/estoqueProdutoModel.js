@@ -1,13 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  OptionalReferenceType,
-  ReferenceType,
-  DecimalType,
-  IntegerType,
-  BooleanType,
-  CriadoAsType,
-} = require("../utils/modelTypes.js");
 const DuplicataDetalhe = require("./duplicataDetalheModel.js");
 const Produto = require("./produtoModel.js");
 const Estoque = require("./estoqueModel.js");
@@ -20,30 +12,56 @@ const EstoqueProduto = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    duplicada_detalhe_id: OptionalReferenceType(DuplicataDetalhe),
-    estoque_id: ReferenceType(Estoque),
-    produto_id: ReferenceType(Produto),
-    quantidade: DecimalType,
+    duplicada_detalhe_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: DuplicataDetalhe,
+        key: "id",
+      },
+    },
+    estoque_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Estoque,
+        key: "id",
+      },
+    },
+    produto_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Produto,
+        key: "id",
+      },
+    },
+    quantidade: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     data: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    sinal: IntegerType,
-    lancamento_manual: BooleanType,
-    criado_as: CriadoAsType,
+    sinal: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    lancamento_manual: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    criado_as: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
-    tableName: "estoques_produtos",
+    tableName: "estoque_produtos",
     timestamps: false,
   }
 );
-
-EstoqueProduto.sync()
-  .then(() => {
-    console.log('Tabela "estoques_produtos" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = EstoqueProduto;

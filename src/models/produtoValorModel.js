@@ -1,10 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  ReferenceType,
-  OptionalReferenceType,
-  DecimalType,
-} = require("../utils/modelTypes.js");
 
 const Produto = require("./produtoModel.js");
 const Usuario = require("./usuarioModel.js");
@@ -18,27 +13,43 @@ const ProdutoValor = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    usuario_id: ReferenceType(Usuario),
-    produto_id: ReferenceType(Produto),
-    cliente_fornecedor: OptionalReferenceType(ClienteFornecedor),
-    valor: DecimalType,
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Usuario,
+        key: "id",
+      },
+    },
+    produto_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Produto,
+        key: "id",
+      },
+    },
+    cliente_fornecedor_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: ClienteFornecedor,
+        key: "id",
+      },
+    },
+    valor: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     data: {
       type: DataTypes.DATE,
       allowNull: false,
     },
   },
   {
-    tableName: "produto_valor",
+    tableName: "produto_valores",
     timestamps: false,
   }
 );
-
-ProdutoValor.sync()
-  .then(() => {
-    console.log('Tabela "produto_valor" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = ProdutoValor;

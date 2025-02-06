@@ -24,12 +24,4 @@ const Fazenda = sequelize.define(
   }
 );
 
-Fazenda.sync()
-  .then(() => {
-    console.log('Tabela "fazendas" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = Fazenda;

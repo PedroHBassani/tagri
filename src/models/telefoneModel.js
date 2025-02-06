@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const { ReferenceType, BooleanType } = require("../utils/modelTypes.js");
 const Pessoa = require("./pessoaModel.js");
 
 const Telefone = sequelize.define(
@@ -11,12 +10,22 @@ const Telefone = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    pessoa_id: ReferenceType(Pessoa),
+    pessoa_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Pessoa,
+        key: "id",
+      },
+    },
     numero_com_ddd: {
       type: DataTypes.STRING(15),
       allowNull: false,
     },
-    principal: BooleanType,
+    principal: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
     modificado_as: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -28,13 +37,5 @@ const Telefone = sequelize.define(
     timestamps: false,
   }
 );
-
-Telefone.sync()
-  .then(() => {
-    console.log('Tabela "telefone" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = Telefone;

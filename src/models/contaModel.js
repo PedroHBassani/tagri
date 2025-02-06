@@ -28,12 +28,4 @@ const Conta = sequelize.define(
   }
 );
 
-Conta.sync()
-  .then(() => {
-    console.log('Tabela "contas" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
-
 module.exports = Conta;

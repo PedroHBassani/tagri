@@ -1,10 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  ReferenceType,
-  DateType,
-  DecimalType,
-} = require("../utils/modelTypes.js");
 const DuplicataParcela = require("./duplicataParcelaModel.js");
 const Usuario = require("./usuarioModel.js");
 
@@ -16,12 +11,38 @@ const DuplicataParcelaHist = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    duplicata_parcela_id: ReferenceType(DuplicataParcela),
-    usuario_id: ReferenceType(Usuario),
-    valor: DecimalType,
-    valor_multa: DecimalType,
-    valor_juros: DecimalType,
-    valor_desconto: DecimalType,
+    duplicata_parcela_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: DuplicataParcela,
+        key: "id",
+      },
+    },
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Usuario,
+        key: "id",
+      },
+    },
+    valor: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_multa: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_juros: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    valor_desconto: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
     tipo_lancamento: {
       type: DataTypes.STRING(16),
       allowNull: false,
@@ -31,7 +52,10 @@ const DuplicataParcelaHist = sequelize.define(
       allowNull: false,
       defaultValue: "",
     },
-    data_movimento: DateType,
+    data_movimento: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     criado_as: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -43,13 +67,5 @@ const DuplicataParcelaHist = sequelize.define(
     timestamps: false,
   }
 );
-
-DuplicataParcelaHist.sync()
-  .then(() => {
-    console.log('Tabela "duplicata_parcela_hist" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = DuplicataParcelaHist;

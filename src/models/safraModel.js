@@ -1,12 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database.js");
-const {
-  ReferenceType,
-  IntegerType,
-  DecimalType,
-  DateType,
-  OptionalDecimalType,
-} = require("../utils/modelTypes.js");
 const Entidade = require("./entidadeModel.js");
 const Fazenda = require("./fazendaModel.js");
 const CentroCusto = require("./centroCustoModel.js");
@@ -19,33 +12,67 @@ const Safra = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    entidade_id: ReferenceType(Entidade),
-    periodo_agricola_id: IntegerType,
-    sistema_manejo_id: IntegerType,
-    fazenda_id: ReferenceType(Fazenda),
-    centro_custo_id: ReferenceType(CentroCusto),
-    produto_plantado_id: IntegerType,
+    entidade_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Entidade,
+        key: "id",
+      },
+    },
+    periodo_agricola_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    sistema_manejo_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    fazenda_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Fazenda,
+        key: "id",
+      },
+    },
+    centro_custo_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: CentroCusto,
+        key: "id",
+      },
+    },
+    produto_plantado_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     talhao: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    area_ha: DecimalType,
-    data_plantio: DateType,
-    data_colheita: DateType,
-    peso_colhido: OptionalDecimalType,
+    area_ha: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    data_plantio: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    data_colheita: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    peso_colhido: {
+      type: DataTypes.DECIMAL,
+      allowNull: true,
+    },
   },
   {
-    tableName: "safra",
+    tableName: "safras",
     timestamps: false,
   }
 );
-
-Safra.sync()
-  .then(() => {
-    console.log('Tabela "safra" sincronizada com sucesso!');
-  })
-  .catch((error) => {
-    console.error("Erro ao sincronizar o modelo com o banco de dados:", error);
-  });
 
 module.exports = Safra;
