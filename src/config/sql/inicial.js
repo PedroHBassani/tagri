@@ -53,8 +53,8 @@ const entidades = `INSERT INTO entidades (pessoa_id) VALUES (3), (4);`;
 
 const usuarios = `
   INSERT INTO usuarios (pessoa_id, login, senha, ultima_mudanca_senha, ultimo_acesso, criado_em) VALUES
-    (1, 'root', '$2b$12$KyKaNFWx4L7UAW95bqZPCuwSpaBxslgsfJMDjylQtJq0SaoDBRPb2', now(), now(), now()),
-    (2, 'lucas@tafarel.com.br', '$2b$12$KyKaNFWx4L7UAW95bqZPCuwSpaBxslgsfJMDjylQtJq0SaoDBRPb2', now(), now(), now());
+    (1, 'root', '$2b$10$bpJn/5iGUPmzGTrncmAKhO.Ge0CnV1RCm99Fpswy1wyo/9hqWwGVi', now(), now(), now()),
+    (2, 'pedro@gmail', '$2b$10$bpJn/5iGUPmzGTrncmAKhO.Ge0CnV1RCm99Fpswy1wyo/9hqWwGVi', now(), now(), now());
 `;
 
 const usuarioEntidades = `

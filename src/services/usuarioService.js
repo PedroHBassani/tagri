@@ -11,7 +11,10 @@ module.exports = {
       throw new Error("Nome de usuário em uso.");
     }
     const novaSenha = await bcrypt.hash(senha, 10);
-    const pessoa_id = await Pessoa.create({ nome, data_nascimento: new Date() });
+    const pessoa_id = await Pessoa.create({
+      nome,
+      data_nascimento: new Date(),
+    });
     const entidade_id = await Entidade.create({ pessoa_id: pessoa_id.id }).id;
     const ultimo_acesso = new Date();
     return await Usuario.create({
@@ -57,7 +60,7 @@ module.exports = {
     usuario.ultimo_acesso = new Date();
 
     const token = jwt.sign(
-      { id: usuario.id, login: usuario.login },
+      { id: usuario.id, login: usuario.login, entidade: usuario.pessoa_id },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
