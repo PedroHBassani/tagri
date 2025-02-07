@@ -59,8 +59,15 @@ module.exports = {
     }
     usuario.ultimo_acesso = new Date();
 
+    const entidade = await Entidade.findByPk(usuario.pessoa_id);
+
     const token = jwt.sign(
-      { id: usuario.id, login: usuario.login, entidade: usuario.pessoa_id },
+      {
+        id: usuario.id,
+        login: usuario.login,
+        entidade: usuario.pessoa_id,
+        pessoa_id: entidade.pessoa_id,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
