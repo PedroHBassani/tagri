@@ -4,10 +4,10 @@ const Big = require("big.js");
 
 module.exports = {
   async criar(duplicataParcelaHist) {
-    const duplicataParcelaHist = await DuplicataParcelaHist.create(
+    const duplicataParcelaHis = await DuplicataParcelaHist.create(
       duplicataParcelaHist
     );
-    return duplicataParcelaHist;
+    return duplicataParcelaHis;
   },
 
   async pegar(id) {

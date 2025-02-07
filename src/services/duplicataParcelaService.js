@@ -5,8 +5,8 @@ const Big = require("big.js");
 
 module.exports = {
   async criar(duplicataParcela) {
-    const duplicataParcela = await DuplicataParcela.create(duplicataParcela);
-    return duplicataParcela;
+    const duplicataParcel = await DuplicataParcela.create(duplicataParcela);
+    return duplicataParcel;
   },
 
   async pegar(id) {

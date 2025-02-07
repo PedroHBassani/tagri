@@ -2,8 +2,8 @@ const Email = require("../models/emailModel.js");
 
 module.exports = {
   async criar({ pessoa_id, email, principal }) {
-    const email = await Email.create({ pessoa_id, email, principal });
-    return email;
+    const emai = await Email.create({ pessoa_id, email, principal });
+    return emai;
   },
 
   async atualizar({ pessoa_id, email, principal }) {

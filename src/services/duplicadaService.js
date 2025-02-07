@@ -5,8 +5,8 @@ const Big = require("big.js");
 
 module.exports = {
   async criar(duplicata) {
-    const duplicata = await Duplicata.create(duplicata);
-    return duplicata;
+    const duplicat = await Duplicata.create(duplicata);
+    return duplicat;
   },
 
   async pegar(id) {
@@ -15,11 +15,11 @@ module.exports = {
   },
 
   async atualizar(id, duplicata) {
-    const duplicata = await Duplicata.findByPk(id);
-    if (!duplicata) throw new Error("Duplicata não encontrada");
+    const antigo = await Duplicata.findByPk(id);
+    if (!antigo) throw new Error("Duplicata não encontrada");
 
-    await duplicata.update(duplicata);
-    return duplicata;
+    await antigo.update(duplicata);
+    return antigo;
   },
 
   async deletar(id) {
