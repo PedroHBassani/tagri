@@ -7,6 +7,7 @@ const { success, error } = require("../utils/response.js");
 const duplicataParcelaHistService = require("../services/duplicataParcelaHistService.js");
 const duplicataDetalhesService = require("../services/duplicataDetalhesService.js");
 const estoqueProdutoService = require("../services/estoqueProdutoService.js");
+const DuplicataParcela = require("../models/duplicataParcelaModel.js");
 
 module.exports = {
   async criar(req, res) {
@@ -16,29 +17,26 @@ module.exports = {
       pessoa_id,
       quantidade_parcelas,
       valor_cobrado,
-      sinal,
       data_lancamento,
       data_vencimento_primeira_parcela,
     } = req.body;
 
     try {
       const duplicata = await duplicataHandlers.salvar_duplicata_e_parcelas({
-        centro_custo_id: centro_custo_id,
+        centro_custo_id,
         entidade_id: req.user.entidade,
-        conta_id: conta_id,
-        pessoa_id: pessoa_id,
-        cliente_fornecedor_id: null,
         usuario_id: req.user.usuario_id,
-        quantidade_parcelas: quantidade_parcelas,
-        valor_cobrado: valor_cobrado,
-        sinal: sinal,
-        data_lancamento: data_lancamento,
-        data_vencimento_primeira_parcela: data_vencimento_primeira_parcela,
-        produtos: null,
+        conta_id,
+        pessoa_id,
+        data_lancamento,
+        data_vencimento_primeira_parcela,
+        quantidade_parcelas,
+        valor_cobrado,
+        sinal: 1,
       });
       success(res, "", duplicata);
     } catch (err) {
-      error(res, "Erro ao criar a conta pagar: " + err.message);
+      error(res, "Erro ao criar a conta receber: " + err.message);
     }
   },
 
@@ -51,7 +49,7 @@ module.exports = {
       );
       success(res, "", duplicata);
     } catch (err) {
-      error(res, "Erro ao pegar a parcela conta a pagar: " + err.message);
+      error(res, "Erro ao pegar a parcela conta a receber: " + err.message);
     }
   },
 
@@ -62,7 +60,7 @@ module.exports = {
       );
       success(res, "", duplicatas);
     } catch (err) {
-      error(res, "Erro ao listar as contas a pagar: " + err.message);
+      error(res, "Erro ao listar as contas a receber: " + err.message);
     }
   },
 
@@ -78,9 +76,14 @@ module.exports = {
     } = req.body;
 
     try {
-      var valor_cobrado = new Big(0);
-      for (var produto in info.produtos) {
-        valor_cobrado += produto.valor_cobrado;
+      var produtos = [];
+      for (var produto_comprado in produtos_comprados) {
+        produtos.push({
+          produto_id: produto_comprado.produto_id,
+          estoque_id: produto_comprado.estoque_id,
+          quantidade: produto_comprado.quantidade,
+          valor_cobrado: produto_comprado.valor_cobrado,
+        });
       }
 
       var cliente_fornecedor = await clienteFornecedorService.pegar(
@@ -90,17 +93,18 @@ module.exports = {
       const duplicata = await duplicataHandlers.salvar_duplicata_e_parcelas({
         centro_custo_id,
         entidade_id: req.user.entidade,
-        conta_id: conta_id,
+        conta_id,
         pessoa_id: cliente_fornecedor.pessoa_id,
         cliente_fornecedor_id: cliente_fornecedor_id ?? null,
         usuario_id: req.user.usuario_id,
-        quantidade_parcelas: quantidade_parcelas,
+        quantidade_parcelas,
         valor_cobrado,
-        sinal: sinal,
-        data_lancamento: data_lancamento,
-        data_vencimento_primeira_parcela: data_vencimento_primeira_parcela,
-        produtos: produtos_comprados ?? null,
+        sinal,
+        data_lancamento,
+        data_vencimento_primeira_parcela,
+        produtos,
       });
+
       success(res, "", duplicata);
     } catch (err) {
       error(res, "Erro ao criar movimentacao estoque: " + err.message);
@@ -115,10 +119,11 @@ module.exports = {
       );
       success(res, "", hists);
     } catch (err) {
-      error(res, "Erro ao criar movimentacao estoque: " + err.message);
+      error(res, "Erro ao listar historicos: " + err.message);
     }
   },
 
+  // TODO - VERIFICAR PARA UNIFICAR METODOS DE CONTAS A PAGAR E RECEBER
   async baixar(req, res) {
     const {
       duplicata_parcela_id,
@@ -158,12 +163,13 @@ module.exports = {
           parcela.duplicata_id
         ),
       ]);
-
-      success(res, "Parcela baixada com sucesso!", hist);
+      success(res, "Conta baixada com sucesso!", hist);
     } catch (err) {
-      error(res, "Erro ao baixar parcela: " + err.message);
+      error(res, "Erro ao baixar conta: " + err.message);
     }
   },
+
+  // TODO - VERIFICAR PARA UNIFICAR METODOS DE CONTAS A PAGAR E RECEBER
   async estornar(req, res) {
     const { duplicata_parcela_hist_id_estornar, detalhes, data_movimento } =
       req.body;
@@ -217,9 +223,9 @@ module.exports = {
         }
       }
 
-      success(res, "Parcela estornada com sucesso!", hist);
+      success(res, "conta estornada com sucesso!", hist);
     } catch (err) {
-      error(res, "Erro ao estornar parcela: " + err.message);
+      error(res, "Erro ao estornar conta: " + err.message);
     }
   },
 };
