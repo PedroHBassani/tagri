@@ -109,7 +109,7 @@ const Duplicata = sequelize.define(
     },
     data_ultimo_pagamento: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     criado_as: {
       type: DataTypes.DATE,

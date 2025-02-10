@@ -4,8 +4,32 @@ const DuplicataParcelaHist = require("../models/duplicataParcelaHistModel.js");
 const Big = require("big.js");
 
 module.exports = {
-  async criar(duplicataParcela) {
-    const duplicataParcel = await DuplicataParcela.create(duplicataParcela);
+  async criar({
+    duplicata_id,
+    data_vencimento,
+    numero_parcela,
+    valor_cobrado,
+    valor_pago,
+    valor_multa,
+    valor_juros,
+    valor_desconto,
+    valor_aberto,
+    status,
+    data_ultimo_pagamento,
+  }) {
+    const duplicataParcel = await DuplicataParcela.create({
+      duplicata_id,
+      data_vencimento,
+      numero_parcela,
+      valor_cobrado,
+      valor_pago,
+      valor_multa,
+      valor_juros,
+      valor_desconto,
+      valor_aberto,
+      status,
+      data_ultimo_pagamento,
+    });
     return duplicataParcel;
   },
 
@@ -14,12 +38,35 @@ module.exports = {
     return duplicataParcela;
   },
 
-  async atualizar(id, duplicataParcela) {
+  async atualizar({
+    id,
+    duplicata_id,
+    data_vencimento,
+    numero_parcela,
+    valor_cobrado,
+    valor_pago,
+    valor_multa,
+    valor_juros,
+    valor_desconto,
+    valor_aberto,
+    status,
+    data_ultimo_pagamento,
+  }) {
     const antiga = await DuplicataParcela.findByPk(id);
     if (!antiga) {
       throw new Error("DuplicataParcela não encontrada");
     }
-    await antiga.update(duplicataParcela);
+    antiga.duplicata_id = duplicata_id;
+    antiga.data_vencimento = data_vencimento;
+    antiga.numero_parcela = numero_parcela;
+    antiga.valor_cobrado = valor_cobrado;
+    antiga.valor_pago = valor_pago;
+    antiga.valor_multa = valor_multa;
+    antiga.valor_juros = valor_juros;
+    antiga.valor_desconto = valor_desconto;
+    antiga.valor_aberto = valor_aberto;
+    antiga.status = status;
+    antiga.data_ultimo_pagamento = data_ultimo_pagamento;
     return antiga;
   },
 

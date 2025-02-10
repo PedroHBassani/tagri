@@ -49,7 +49,7 @@ const DuplicataParcelaHist = sequelize.define(
     },
     detalhes: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
       defaultValue: "",
     },
     data_movimento: {

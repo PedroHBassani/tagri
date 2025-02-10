@@ -4,9 +4,47 @@ const DuplicatasParcelas = require("../models/duplicataParcelaModel.js");
 const Big = require("big.js");
 
 module.exports = {
-  async criar(duplicata) {
-    const duplicat = await Duplicata.create(duplicata);
-    return duplicat;
+  async criar({
+    centro_custo_id,
+    entidade_id,
+    conta_id,
+    moeda_id,
+    pessoa_id,
+    usuario_id,
+    numero_parcelas,
+    numero_parcelas_abertas,
+    valor_cobrado,
+    valor_pago,
+    valor_multa,
+    valor_juros,
+    valor_desconto,
+    valor_aberto,
+    status,
+    sinal,
+    data_lancamento,
+    data_ultimo_pagamento,
+  }) {
+    const duplicata = await Duplicata.create({
+      centro_custo_id,
+      entidade_id,
+      conta_id,
+      moeda_id,
+      pessoa_id,
+      usuario_id,
+      numero_parcelas,
+      numero_parcelas_abertas,
+      valor_cobrado,
+      valor_pago,
+      valor_multa,
+      valor_juros,
+      valor_desconto,
+      valor_aberto,
+      status,
+      sinal,
+      data_lancamento,
+      data_ultimo_pagamento,
+    });
+    return duplicata;
   },
 
   async pegar(id) {
@@ -14,11 +52,50 @@ module.exports = {
     return duplicata;
   },
 
-  async atualizar(id, duplicata) {
+  async atualizar({
+    id,
+    centro_custo_id,
+    entidade_id,
+    conta_id,
+    moeda_id,
+    pessoa_id,
+    usuario_id,
+    numero_parcelas,
+    numero_parcelas_abertas,
+    valor_cobrado,
+    valor_pago,
+    valor_multa,
+    valor_juros,
+    valor_desconto,
+    valor_aberto,
+    status,
+    sinal,
+    data_lancamento,
+    data_ultimo_pagamento,
+  }) {
     const antigo = await Duplicata.findByPk(id);
     if (!antigo) throw new Error("Duplicata não encontrada");
 
-    await antigo.update(duplicata);
+    antigo.centro_custo_id = centro_custo_id;
+    antigo.entidade_id = entidade_id;
+    antigo.conta_id = conta_id;
+    antigo.moeda_id = moeda_id;
+    antigo.pessoa_id = pessoa_id;
+    antigo.usuario_id = usuario_id;
+    antigo.numero_parcelas = numero_parcelas;
+    antigo.numero_parcelas_abertas = numero_parcelas_abertas;
+    antigo.valor_cobrado = valor_cobrado;
+    antigo.valor_pago = valor_pago;
+    antigo.valor_multa = valor_multa;
+    antigo.valor_juros = valor_juros;
+    antigo.valor_desconto = valor_desconto;
+    antigo.valor_aberto = valor_aberto;
+    antigo.status = status;
+    antigo.sinal = sinal;
+    antigo.data_lancamento = data_lancamento;
+    antigo.data_ultimo_pagamento = data_ultimo_pagamento;
+    
+    await antigo.update()
     return antigo;
   },
 

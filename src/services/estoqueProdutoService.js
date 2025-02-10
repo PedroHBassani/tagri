@@ -5,6 +5,7 @@ const Produto = require("../models/produtoModel.js");
 
 module.exports = {
   async criar({
+    duplicata_detalhe_id,
     estoque_id,
     produto_id,
     quantidade,
@@ -13,7 +14,7 @@ module.exports = {
     lancamento_manual,
   }) {
     const estoque = await EstoqueProduto.create({
-      duplicata_detalhe_id: 0,
+      duplicata_detalhe_id: duplicata_detalhe_id ?? null,
       estoque_id,
       produto_id,
       quantidade,
