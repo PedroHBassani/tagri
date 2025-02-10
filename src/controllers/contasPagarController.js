@@ -5,6 +5,8 @@ const clienteFornecedorService = require("../services/clienteFornecedorService.j
 
 const { success, error } = require("../utils/response.js");
 const duplicataParcelaHistService = require("../services/duplicataParcelaHistService.js");
+const duplicataDetalhesService = require("../services/duplicataDetalhesService.js");
+const estoqueProdutoService = require("../services/estoqueProdutoService.js");
 
 module.exports = {
   async criar(req, res) {
@@ -116,6 +118,108 @@ module.exports = {
     }
   },
 
-  // TODO: função baixar
-  // TODO: função estornar
+  async baixar(req, res) {
+    const {
+      duplicata_parcela_id,
+      valor,
+      valor_multa,
+      valor_juros,
+      valor_desconto,
+      detalhes,
+      data_movimento,
+    } = req.body;
+    try {
+      
+      // Para realizar a baixar é preciso:
+      // 1 - Criar uma Hist de baixa
+      // 2 - Atualizar os valores e status na parcela
+      // 3 - Atualizar os valores e status na duplicata
+
+      const [parcela, hist] = await Promise.all([
+        await duplicataParcelaService.pegar(duplicata_parcela_id),
+        await duplicataParcelaHistService.criar({
+          duplicata_parcela_id,
+          usuario_id: req.user.usuario_id,
+          valor,
+          valor_multa,
+          valor_juros,
+          valor_desconto,
+          tipo_lancamento: "B",
+          detalhes,
+          data_movimento,
+        }),
+      ]);
+
+      await Promise.all([
+        await duplicataParcelaService.atualizar_valores_e_status(
+          duplicata_parcela_id
+        ),
+        await duplicataParcelaService.atualizar_valores_e_status(
+          parcela.duplicata_id
+        ),
+      ]);
+
+      success(res, "Parcela baixada com sucesso!", hist);
+    } catch (err) {
+      error(res, "Erro ao baixar parcela: " + err.message);
+    }
+  },
+  async estornar(req, res) {
+    const { duplicata_parcela_hist_id_estornar, detalhes, data_movimento } =
+      req.body;
+
+    // Para realizar o estorno é preciso:
+    // 1 - Criar uma Hist de estorno
+    // 2 - Atualizar os valores e status na parcela
+    // 3 - Atualizar os valores e status na duplicata
+    // 4 - Se a duplicata for estornada por completo e ela tem produtos vinculados, remover as movimentações no estoque
+
+    try {
+      const hist_estornar = await duplicataParcelaHistService.pegar(
+        duplicata_parcela_hist_id_estornar
+      );
+
+      const [hist, parcela] = await Promise.all([
+        await duplicataParcelaHistService.criar({
+          duplicata_parcela_id: hist_estornar.duplicata_parcela_id,
+          usuario_id: req.user.usuario_id,
+          valor: hist_estornar.valor,
+          valor_multa: hist_estornar.valor_multa,
+          valor_juros: hist_estornar.valor_juros,
+          valor_desconto: hist_estornar.valor_desconto,
+          tipo_lancamento: "E",
+          detalhes,
+          data_movimento,
+        }),
+        await duplicataParcelaService.atualizar_valores_e_status(
+          hist_estornar.duplicata_parcela_id
+        ),
+      ]);
+
+      const duplicata =
+        await duplicataParcelaService.atualizar_valores_e_status(
+          parcela.duplicata_id
+        );
+
+      if (duplicata.status == "E") {
+        const detalhes = await duplicataDetalhesService.listar_da_duplicata(
+          duplicata.id
+        );
+        const detalhe_ids = [];
+        for (var detalhe in detalhes) {
+          detalhe_ids.push(detalhe.id);
+        }
+
+        if (detalhe_ids.length > 0) {
+          await estoqueProdutoService.deletar_pelo_duplica_detalhe_ids(
+            detalhe_ids
+          );
+        }
+      }
+
+      success(res, "Parcela estornada com sucesso!", hist);
+    } catch (err) {
+      error(res, "Erro ao estornar parcela: " + err.message);
+    }
+  },
 };

@@ -67,6 +67,7 @@ module.exports = {
         login: usuario.login,
         entidade: usuario.pessoa_id,
         pessoa_id: entidade.pessoa_id,
+        usuario_id: usuario.id
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
