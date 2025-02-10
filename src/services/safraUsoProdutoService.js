@@ -64,4 +64,30 @@ module.exports = {
 
     return safras;
   },
+
+  async listar_fe(safra_id, pratica_agricola_id) {
+    const resultados = await SafraUsoProduto.findAll({
+      include: [
+        {
+          model: EstoqueProduto,
+          include: [
+            { model: Produto, attributes: ["id", "nome"] },
+            { model: Estoque, attributes: ["id", "nome"] },
+          ],
+          attributes: ["produto_id", "quantidade", "data"],
+        },
+      ],
+      where: {
+        safra_id,
+        pratica_agricola_id,
+      },
+      attributes: ["id"],
+      order: [
+        [EstoqueProduto, "data", "DESC"],
+        [EstoqueProduto, "id", "DESC"],
+      ],
+    });
+
+    return resultados;
+  },
 };

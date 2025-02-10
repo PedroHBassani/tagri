@@ -2,7 +2,10 @@ const Pessoa = require("../models/pessoaModel.js");
 
 module.exports = {
   async criar({ nome, data_nascimento }) {
-    const pessoa = await Pessoa.create({ nome, data_nascimento });
+    const pessoa = await Pessoa.create({
+      nome,
+      data_nascimento: data_nascimento ?? "",
+    });
     return pessoa;
   },
 

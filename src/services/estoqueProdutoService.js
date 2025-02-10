@@ -1,11 +1,26 @@
 const { Op } = require("sequelize");
-const EstoqueProduto = require("../models/estoqueModel.js");
+const EstoqueProduto = require("../models/estoqueProdutoModel.js");
 const Estoque = require("../models/estoqueModel.js");
 const Produto = require("../models/produtoModel.js");
 
 module.exports = {
-  async criar(estoqueProduto) {
-    const estoque = await EstoqueProduto.create(estoqueProduto);
+  async criar({
+    estoque_id,
+    produto_id,
+    quantidade,
+    data,
+    sinal,
+    lancamento_manual,
+  }) {
+    const estoque = await EstoqueProduto.create({
+      duplicata_detalhe_id: 0,
+      estoque_id,
+      produto_id,
+      quantidade,
+      data,
+      sinal,
+      lancamento_manual: lancamento_manual ?? true,
+    });
     return estoque;
   },
 
@@ -17,12 +32,27 @@ module.exports = {
     return estoque;
   },
 
-  async atualizar(id, estoqueProduto) {
+  async atualizar({
+    id,
+    estoque_id,
+    produto_id,
+    quantidade,
+    data,
+    sinal,
+    lancamento_manual,
+  }) {
     const estoque = await EstoqueProduto.findByPk(id);
     if (!estoque) {
       throw new Error("Estoque não encontrado");
     }
-    await estoque.update(estoqueProduto);
+
+    estoque.estoque_id = estoque_id;
+    estoque.produto_id = produto_id;
+    estoque.quantidade = quantidade;
+    estoque.data = data;
+    estoque.sinal = sinal;
+    estoque.lancamento_manual = lancamento_manual ?? true;
+
     await estoque.save();
     return estoque;
   },

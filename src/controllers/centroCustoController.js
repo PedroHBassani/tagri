@@ -49,7 +49,7 @@ module.exports = {
     try {
       await centroCustoService.deletar(id);
       success(res, "Registro deletado com sucesso!");
-    } catch (error) {
+    } catch (err) {
       error(res, "Erro ao atualizar o centro custo: " + err.message);
     }
   },
@@ -58,7 +58,7 @@ module.exports = {
     try {
       const centrosCustos = await centroCustoService.listar_da_entidade(req.user.entidade);
       success(res, "", centrosCustos);
-    } catch (error) {
+    } catch (err) {
       error(res, "Erro ao listar os centros custos: " + err.message);
     }
   },

@@ -42,7 +42,7 @@ module.exports = {
     try {
       const cliente = await clienteFornecedorService.pegar(id);
       success(res, "", cliente);
-    } catch (error) {
+    } catch (err) {
       error(res, "Erro ao criar o cliente fornecedor: " + err.message);
     }
   },
