@@ -36,7 +36,7 @@ contasPagarRouter.post(
 );
 
 contasPagarRouter.get(
-  "/{duplicata_parcela_id}/hists",
+  "/:duplicata_parcela_id/hists",
   validateSchema(listarHistsSchema, "params"),
   contasPagarController.listar_hists
 );

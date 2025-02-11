@@ -14,9 +14,11 @@ const routes = (app) => {
   app.use("/banco", require("./bancoRouter.js"));
   app.use("/conta", require("./contaRouter.js"));
   app.use("/estado", require("./estadoRouter.js"));
+  app.use("/fazenda", require("./fazendaResponsavelRouter.js"));
   app.use("/fazenda", require("./fazendaRouter.js"));
   app.use("/municipio", require("./municipioRouter.js"));
   app.use("/pessoas", require("./pessoaRouter.js"));
+  app.use("/estoque", require("./estoqueMovimentacaoRouter.js"));
   app.use("/estoque", require("./estoqueRouter.js"));
   app.use("/tipo", require("./tipoRouter.js"));
   app.use("/produto", require("./produtoRouter.js"));

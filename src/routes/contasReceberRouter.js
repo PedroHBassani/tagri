@@ -36,7 +36,7 @@ contasReceberRouter.post(
 );
 
 contasReceberRouter.get(
-  "/{duplicata_parcela_id}/hists",
+  "/:duplicata_parcela_id/hists",
   validateSchema(listarHistsSchema, "params"),
   contasReceberController.listar_hists
 );
