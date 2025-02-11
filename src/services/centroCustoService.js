@@ -1,4 +1,6 @@
 const CentroCusto = require("../models/centroCustoModel.js");
+const Duplicata = require("../models/duplicataModel.js");
+const Safra = require("../models/safraModel.js");
 
 module.exports = {
   async criar({ entidade_id, centro_custo_id, nome, descricao }) {
@@ -28,9 +30,25 @@ module.exports = {
     const centroCusto = await this.pegar(id);
     if (!centroCusto) throw new Error("Centro de custo não encontrado");
 
-    // TODO: VERIFICAR SE TEM DUPLICATAS LANÇADAS.
+    const query = {
+      where: { centro_custo_id: id },
+    };
+    const [duplicatas, safras] = await Promise.all([
+      Duplicata.findOne(query),
+      Safra.findOne(query),
+    ]);
 
-    // TOOD: VERIFICAR SE TEM VINCULOS COM SAFRAS.
+    if (duplicatas) {
+      throw new Error(
+        "Não será possível remover o centro de custo porque existem lançamentos atrelados a ele"
+      );
+    }
+
+    if (safras) {
+      throw new Error(
+        "Não será possível remover o centro de custo pois o mesmo está atrelado a uma safra"
+      );
+    }
 
     await centroCusto.destroy();
   },
