@@ -127,7 +127,7 @@ module.exports = {
   async baixar(req, res) {
     const {
       duplicata_parcela_id,
-      valor,
+      valor_pago,
       valor_multa,
       valor_juros,
       valor_desconto,
@@ -145,7 +145,7 @@ module.exports = {
         await duplicataParcelaHistService.criar({
           duplicata_parcela_id,
           usuario_id: req.user.usuario_id,
-          valor,
+          valor_pago,
           valor_multa,
           valor_juros,
           valor_desconto,

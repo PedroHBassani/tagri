@@ -20,6 +20,8 @@ const routes = (app) => {
   app.use("/estoque", require("./estoqueRouter.js"));
   app.use("/tipo", require("./tipoRouter.js"));
   app.use("/produto", require("./produtoRouter.js"));
+  app.use("/contas-a-pagar", require("./contasPagarRouter.js"));
+  app.use("/contas-a-receber", require("./contasReceberRouter.js"));
 
   app.use((req, res) => {
     return error(res, "Rota não encontrada", 404);

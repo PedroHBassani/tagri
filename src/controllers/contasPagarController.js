@@ -16,24 +16,23 @@ module.exports = {
       pessoa_id,
       quantidade_parcelas,
       valor_cobrado,
-      sinal,
       data_lancamento,
       data_vencimento_primeira_parcela,
     } = req.body;
 
     try {
       const duplicata = await duplicataHandlers.salvar_duplicata_e_parcelas({
-        centro_custo_id: centro_custo_id,
+        centro_custo_id,
         entidade_id: req.user.entidade,
-        conta_id: conta_id,
-        pessoa_id: pessoa_id,
+        conta_id,
+        pessoa_id,
         cliente_fornecedor_id: null,
         usuario_id: req.user.usuario_id,
-        quantidade_parcelas: quantidade_parcelas,
-        valor_cobrado: valor_cobrado,
-        sinal: sinal,
-        data_lancamento: data_lancamento,
-        data_vencimento_primeira_parcela: data_vencimento_primeira_parcela,
+        quantidade_parcelas,
+        valor_cobrado,
+        sinal: -1,
+        data_lancamento,
+        data_vencimento_primeira_parcela,
         produtos: null,
       });
       success(res, "", duplicata);
@@ -122,7 +121,7 @@ module.exports = {
   async baixar(req, res) {
     const {
       duplicata_parcela_id,
-      valor,
+      valor_pago,
       valor_multa,
       valor_juros,
       valor_desconto,
@@ -140,7 +139,7 @@ module.exports = {
         await duplicataParcelaHistService.criar({
           duplicata_parcela_id,
           usuario_id: req.user.usuario_id,
-          valor,
+          valor_pago,
           valor_multa,
           valor_juros,
           valor_desconto,
