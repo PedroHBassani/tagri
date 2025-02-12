@@ -36,7 +36,7 @@ module.exports = {
     }
   },
 
-  async criar(req, res) {
+  async atualizar(req, res) {
     const {
       id,
       fazenda_id,

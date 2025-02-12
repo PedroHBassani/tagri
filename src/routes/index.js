@@ -21,10 +21,12 @@ const routes = (app) => {
   app.use("/estoque", require("./estoqueMovimentacaoRouter.js"));
   app.use("/estoque", require("./estoqueRouter.js"));
   app.use("/tipo", require("./tipoRouter.js"));
+  app.use("/produto", require("./produtoValorRouter.js"));
   app.use("/produto", require("./produtoRouter.js"));
   app.use("/contas-a-pagar", require("./contasPagarRouter.js"));
   app.use("/contas-a-receber", require("./contasReceberRouter.js"));
   app.use("/praticas-agricolas", require("./praticaAgricolaRouter.js"));
+  app.use("/safra", require("./safraRouter.js"));
 
   app.use((req, res) => {
     return error(res, "Rota não encontrada", 404);
