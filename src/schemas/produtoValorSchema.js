@@ -1,9 +1,9 @@
 const Joi = require("joi");
-const { idSchema } = require("./commonSchema.js");
+const { idSchema, idSchemaOptional } = require("./commonSchema.js");
 
 const criarProdutoValorSchema = Joi.object({
   produto_id: idSchema,
-  cliente_fornecedor_id: idSchema.optional(),
+  cliente_fornecedor_id: idSchemaOptional,
   valor: Joi.number().min(0).required(),
   data: Joi.date().required(),
 });
@@ -11,7 +11,7 @@ const criarProdutoValorSchema = Joi.object({
 const atualizarProdutoValorSchema = Joi.object({
   id: idSchema,
   produto_id: idSchema,
-  cliente_fornecedor_id: idSchema.optional(),
+  cliente_fornecedor_id: idSchemaOptional,
   valor: Joi.number().min(0).required(),
   data: Joi.date().required(),
 });

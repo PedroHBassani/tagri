@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { idSchema } = require("./commonSchema.js");
+const { idSchema, idSchemaOptional } = require("./commonSchema.js");
 
 const criarProdutoSchema = Joi.object({
   tipo_id: Joi.number().min(0).required(),
@@ -17,7 +17,7 @@ const atualizarProdutoSchema = Joi.object({
 });
 
 const paginateSchema = Joi.object({
-  tipo_id: idSchema.optional(),
+  tipo_id: idSchemaOptional,
   nome: Joi.string().min(2).max(100).optional(),
   page: Joi.number().min(1).default(1).optional(),
   limit: Joi.number().min(1).default(15).optional(),

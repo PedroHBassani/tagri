@@ -1,8 +1,8 @@
 const Joi = require("joi");
-const { idSchema } = require("./commonSchema.js");
+const { idSchemaOptional } = require("./commonSchema.js");
 
 const filtarPessoas = Joi.object({
-  id: idSchema.optional(),
+  id: idSchemaOptional,
   nome: Joi.string().min(2).max(100).optional(),
 });
 
